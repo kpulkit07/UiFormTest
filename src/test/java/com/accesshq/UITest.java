@@ -1,10 +1,13 @@
 package com.accesshq;
 
 import com.accesshq.Model.Form;
+import com.accesshq.Model.Planet;
+import com.accesshq.Model.PlanetPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -14,6 +17,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 //public class UITest {
     /*  @Test
@@ -48,8 +53,38 @@ import java.time.Duration;
            driver = getWebDriver();
            driver.get("https://d18u5zoaatmpxx.cloudfront.net/#/");
            driver.manage().window().maximize();
+       // driver.manage().timeouts().implicitlyWait(Duration.ofMillis(350));
     }
+
     @Test
+    public void explorePlanet(){
+
+
+        driver.findElement(By.cssSelector("[aria-label='planets']")).click();
+        PlanetPage planetPage = new PlanetPage(driver);
+        planetPage.getPlanet(planet -> planet.getName().equalsIgnoreCase("Earth"));
+        Assertions.assertEquals("Earth", );
+
+        /*PlanetPage planetPage = new PlanetPage(driver);
+        ArrayList<Planet> allPlanets = planetPage.getAllPlanets();
+      //  Planet planet = planetPage.getPlanetByName("Earth", allPlanets);
+        Planet planet = planetPage.getPlanetByDistance(4495000f, allPlanets);
+        planet.clickExplore();
+        //Assertions.assertEquals("Earth", planet.getName());
+
+       /* for (WebElement planeElement: driver.findElements(By.className("planet"))){
+
+            Planet planet = new Planet(planeElement);
+
+            if(planeElement.findElement(By.tagName("h2")).getText().equalsIgnoreCase("jupiter")){
+                planeElement.findElement(By.tagName("button")).click();
+                break;
+            }
+        }*/
+
+        }
+
+  /*  @Test
     public void clickForms(){
         driver.findElement(By.cssSelector("[aria-label='forms']")).click();
         Form form = new Form(driver);
@@ -81,11 +116,12 @@ import java.time.Duration;
         for (WebElement state: states){
             if (state.getText().equals("NSW"))
                 state.click();
+
         }*/
         //Select state = new Select(driver.findElement(By.className("v-select__slot")));
         //state.selectByVisibleText("NSW");
-        //state.selectByIndex(1);
-    }
+        //state.selectByIndex(1);*/
+
 /*
     @Test
     public void clickMeUpToDownButton(){
@@ -105,7 +141,7 @@ import java.time.Duration;
     }*/
     @AfterEach
     public void clear(){
-        driver.quit();
+       //driver.quit();
     }
     private WebDriver getWebDriver() {
         ChromeOptions options = new ChromeOptions();

@@ -1,6 +1,7 @@
 package com.accesshq.Model;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -22,14 +23,15 @@ public class Form {
         driver.findElement(By.id("email")).sendKeys(email);
     }
 
-    public void selectState(String nsw) {
+    public void selectState(String state) {
         driver.findElement(By.className("v-input__append-inner")).click();
         new WebDriverWait(driver, Duration.ofSeconds(2)).until(ExpectedConditions.
                 visibilityOfElementLocated(By.cssSelector("[role=option]")));
         for (WebElement selectState: driver.findElements(By.cssSelector("[role=option]"))) {
-            if(selectState.getText().equalsIgnoreCase(nsw)){
+            if (selectState.getText().equalsIgnoreCase(state)) {
                 selectState.click();
             }
+          //throw new NotFoundException("could not find" + state);
         }
     }
 
